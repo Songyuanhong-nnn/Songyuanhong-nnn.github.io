@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>我的编程故事</title>
+	<style>
+		body {
+			background-color: pink;
+			color: white;
+			font-family: Arial, sans-serif;
+			text-align: center;
+		}
+		
+		h1 {
+			font-size: 3rem;
+			margin-top: 2rem;
+			animation: spin 5s linear infinite;
+		}
+		
+		p {
+			font-size: 2rem;
+			margin-top: 2rem;
+			animation: bounce 2s ease-in-out infinite;
+		}
+		
+		@keyframes spin {
+			0% { transform: rotate(0deg); }
+			100% { transform: rotate(360deg); }
+		}
+		
+		@keyframes bounce {
+			0%, 100% { transform: translateY(0); }
+			50% { transform: translateY(-20px); }
+		}
+	</style>
+</head>
+<body>
+	<h1>我的编程故事</h1>
+	<p>我从小就对计算机和编程非常感兴趣，经过多年的学习和实践，我成为了一名优秀的程序员。</p>
+</body>
+</html>
