@@ -52,7 +52,7 @@
 <body>
 	<h1>猜数字游戏（宋沅鸿牛逼）</h1>
 	<div id="content">
-		<p>请在1-100之间猜一个数字：</p>
+		<p>小趴菜，在1-100之间猜一个数字：</p>
 		<input type="number" id="inputNumber" min="1" max="100" required>
 		<br>
 		<button onClick="guessNumber()">提交答案</button>
@@ -67,11 +67,11 @@
 		function guessNumber() {
 			var input = document.getElementById("inputNumber").value;
 			if (input == answer) {
-				文档。getElementById（“result”）.innerHTML = “666恭喜你答对了！”;
+				document.getElementById("result").innerHTML = "恭喜小趴菜答对了！";
 			} else if (input < answer) {
-				document.getElementById("result").innerHTML = "猜的太小了，菜鸡！再试一次吧！";
+				document.getElementById("result").innerHTML = "猜的太小了，菜鸡，再试一次吧！";
 			} else {
-				document.getElementById("result").innerHTML = "猜的太大了，菜鸡！再试一次吧！";
+				document.getElementById("result").innerHTML = "猜的太大了，菜鸡，再试一次吧！";
 			}
 			// 清空输入框中的数据
 			document.getElementById("inputNumber").value = "";
