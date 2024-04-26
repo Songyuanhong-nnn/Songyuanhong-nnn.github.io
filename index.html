@@ -1,96 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 <head>
-  <title>视频音频爬虫</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人工智能介绍</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <form>
-    <label for="url">视频/音频网址：</label>
-    <input type="text" id="url" name="url">
+    <header>
+        <h1>人工智能介绍</h1>
+    </header>
 
-    <input type="submit" value="爬取">
-  </form>
+    <main>
+        <section id="intro">
+            <h2>什么是人工智能？</h2>
+            <p>人工智能（AI）是一门新的技术科学，旨在开发和应用能够模拟、延伸和扩展人的智能的理论、方法、技术及应用系统的一门新的技术科学。</p>
+        </section>
 
-  <div id="results"></div>
+        <section id="applications">
+            <h2>人工智能的应用</h2>
+            <ul>
+                <li>自动驾驶</li>
+                <li>智能家居</li>
+                <li>医疗诊断</li>
+                <li>机器人技术</li>
+                <li>自然语言处理</li>
+                <!-- 添加更多应用 -->
+            </ul>
+        </section>
 
-  <script>
-    document.querySelector('form').addEventListener('submit', (event) => {
-      event.preventDefault();
+        <section id="future">
+            <h2>人工智能的未来</h2>
+            <p>人工智能的发展将不断推动科技进步，并在各行各业发挥越来越重要的作用。</p>
+        </section>
+    </main>
 
-      const url = document.querySelector('#url').value;
+    <footer>
+        <p>版权所有 & 联系方式</p>
+    </footer>
 
-      fetch(url)
-        .then(response => response.blob())
-        .then(blob => {
-          const video = document.createElement('video');
-          video.src = URL.createObjectURL(blob);
-          video.controls = true;
-
-          const downloadButton = document.createElement('button');
-          downloadButton.textContent = '下载';
-          downloadButton.addEventListener('click', () => {
-            const a = document.createElement('a');
-            a.href = video.src;
-            a.download = 'video.mp4';
-            a.click();
-          });
-
-          const container = document.createElement('div');
-          container.appendChild(video);
-          container.appendChild(downloadButton);
-
-          document.querySelector('#results').appendChild(container);
-        });
-    });
-  </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-  <title>视频音频爬虫</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <form>
-    <label for="url">视频/音频网址：</label>
-    <input type="text" id="url" name="url">
-
-    <input type="submit" value="爬取">
-  </form>
-
-  <div id="results"></div>
-
-  <script>
-    document.querySelector('form').addEventListener('submit', (event) => {
-      event.preventDefault();
-
-      const url = document.querySelector('#url').value;
-
-      fetch(url)
-        .then(response => response.blob())
-        .then(blob => {
-          const video = document.createElement('video');
-          video.src = URL.createObjectURL(blob);
-          video.controls = true;
-
-          const downloadButton = document.createElement('button');
-          downloadButton.textContent = '下载';
-          downloadButton.addEventListener('click', () => {
-            const a = document.createElement('a');
-            a.href = video.src;
-            a.download = 'video.mp4';
-            a.click();
-          });
-
-          const container = document.createElement('div');
-          container.appendChild(video);
-          container.appendChild(downloadButton);
-
-          document.querySelector('#results').appendChild(container);
-        });
-    });
-  </script>
+    <script src="script.js"></script>
 </body>
 </html>
