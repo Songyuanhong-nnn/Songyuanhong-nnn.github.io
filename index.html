@@ -1,51 +1,78 @@
-<!DOCTYPE html>
-<html lang="zh">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>人工智能介绍</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- 引入字体样式（如果需要） -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <header>
-        <h1>人工智能介绍</h1>
-        <nav>
-            <!-- 添加导航链接（如果需要） -->
-        </nav>
-    </header>
-
-    <main>
-        <section id="intro">
-            <h2>什么是人工智能？</h2>
-            <p>人工智能（AI）是一门新的技术科学，旨在开发和应用能够模拟、延伸和扩展人的智能的理论、方法、技术及应用系统。</p>
-            <img src="ai-illustration.jpg" alt="人工智能插图" class="illustration"> <!-- 添加一张插图 -->
-        </section>
-
-        <section id="applications">
-            <h2>人工智能的应用</h2>
-            <ul>
-                <li>自动驾驶</li>
-                <li>智能家居</li>
-                <li>医疗诊断</li>
-                <li>机器人技术</li>
-                <li>自然语言处理</li>
-                <!-- 添加更多应用 -->
-            </ul>
-        </section>
-
-        <section id="future">
-            <h2>人工智能的未来</h2>
-            <p>人工智能的发展将不断推动科技进步，并在各行各业发挥越来越重要的作用。人工智能，简称AI，是计算机科学的一个分支，旨在开发和应用能够模拟、延伸和扩展人类智能的理论、方法和技术。它融合了数学、心理学、哲学等多学科的理论，通过让计算机模拟人类的思考和行为过程，实现人机交互，提升计算机的智能水平。人工智能的应用领域非常广泛，包括机器人、语音识别、图像识别、自然语言处理、专家系统等，其目标是让机器能够胜任一些通常需要人类智能才能完成的复杂工作。</p>
-            <a href="#" class="learn-more">了解更多</a> <!-- 添加一个了解更多链接 -->
-        </section>
-    </main>
-
-    <footer>
-        <p>版权所有 &copy; 2023 - <a href="mailto:3100323439@qq.com">联系我们</a></p>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
+<!DOCTYPE html>    
+<html lang="en">    
+<head>    
+    <meta charset="UTF-8">    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <title>整蛊按钮切换</title>    
+    <style>    
+        body {  
+            text-align: center;  
+        }  
+        button {  
+            padding: 15px 30px;  
+            font-size: 20px;  
+            margin: 0 10px;  
+            border: none;  
+            border-radius: 5px;  
+            cursor: pointer;  
+            transition: transform 0.2s ease-in-out;  
+        }  
+        button:hover {  
+            transform: scale(1.1);  
+        }  
+    </style>    
+</head>    
+<body>    
+    <p>你是不是猪？</p>    
+    <div class="button-container" id="buttonContainer">  
+        <button id="yesButton" onclick="toggleAndSwap('yes')">是</button>    
+        <button id="noButton" onclick="toggleAndSwap('no')">不是</button>    
+    </div>  
+    <p id="response" class="pig-response"></p>    
+  
+    <script>    
+        var isSwapped = false; // 初始状态，按钮未交换位置  
+  
+        function toggleAndSwap(buttonText) {    
+            var responseElement = document.getElementById("response");  
+            var buttonContainer = document.getElementById("buttonContainer");  
+            var yesButton = document.getElementById("yesButton");  
+            var noButton = document.getElementById("noButton");  
+  
+            // 清除之前的回应并隐藏  
+            responseElement.textContent = "";  
+            responseElement.classList.remove("visible");  
+  
+            // 根据按钮文字给出回应，并显示回应  
+            if (buttonText === 'yes') {    
+                responseElement.textContent = "哈哈，你终于承认了！";
+				// 五秒后关闭浏览器窗口  
+                setTimeout(function() {  
+                    window.close(); // 尝试关闭窗口  
+                }, 5000);  
+            } else {    
+                responseElement.textContent = "居然还不承认！";  
+  
+                // 每次点击“不是”时切换按钮位置  
+                if (isSwapped) {  
+                    // 如果已经交换过，则还原到初始位置  
+                    buttonContainer.appendChild(noButton); // 将“不是”按钮移到末尾  
+                } else {  
+                    // 如果尚未交换，则交换按钮位置  
+                    buttonContainer.appendChild(yesButton); // 将“是”按钮移到末尾  
+                    buttonContainer.insertBefore(noButton, yesButton); // 将“不是”按钮移到“是”按钮前面  
+                }  
+                isSwapped = !isSwapped; // 切换isSwapped的值  
+            }  
+  
+            // 显示回应，并立即开始计时隐藏  
+            responseElement.classList.add("visible");  
+  
+            // 使用setTimeout来添加延迟，以便用户可以看到反馈  
+            setTimeout(function() {  
+                responseElement.classList.remove("visible");  
+            }, 1000); // 延迟1秒后隐藏回应  
+        }    
+    </script>    
+</body>    
 </html>
