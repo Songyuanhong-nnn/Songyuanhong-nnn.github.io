@@ -1,78 +1,68 @@
-<!DOCTYPE html>    
-<html lang="en">    
-<head>    
-    <meta charset="UTF-8">    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
-    <title>你宋大爷驾到</title>    
-    <style>    
-        body {  
-            text-align: center;  
-        }  
-        button {  
-            padding: 15px 30px;  
-            font-size: 20px;  
-            margin: 0 10px;  
-            border: none;  
-            border-radius: 5px;  
-            cursor: pointer;  
-            transition: transform 0.2s ease-in-out;  
-        }  
-        button:hover {  
-            transform: scale(1.1);  
-        }  
-    </style>    
-</head>    
-<body>    
-    <p>你是不是猪？</p>    
-    <div class="button-container" id="buttonContainer">  
-        <button id="yesButton" onclick="toggleAndSwap('yes')">是</button>    
-        <button id="noButton" onclick="toggleAndSwap('no')">不是</button>    
-    </div>  
-    <p id="response" class="pig-response"></p>    
+<!DOCTYPE html>  
+<html lang="zh-CN">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<title>宋大爷加到!通通闪开</title>  
+<style>  
+  /* 简单的样式美化 */  
+  body {  
+    font-family: Arial, sans-serif;  
+    margin: 0;  
+    padding: 20px;  
+  }  
+  h1 {  
+    text-align: center;  
+  }  
+  .download-list {  
+    list-style-type: none;  
+    padding: 0;  
+  }  
+  .download-item {  
+    margin-bottom: 10px;  
+  }  
+  .download-link {  
+    text-decoration: none;  
+    color: #007BFF;  
+    font-weight: bold;  
+  }  
+  /* 防御XSS，这里只是示例，实际上要更加复杂 */  
+  .user-content {  
+    white-space: pre-wrap;  
+    word-wrap: break-word;  
+    /* 使用textContent或innerText来设置内容，避免XSS */  
+  }  
+</style>  
+</head>  
+<body>  
   
-    <script>    
-        var isSwapped = false; // 初始状态，按钮未交换位置  
+<h1>宋沅鸿私人货仓下载库</h1>  
   
-        function toggleAndSwap(buttonText) {    
-            var responseElement = document.getElementById("response");  
-            var buttonContainer = document.getElementById("buttonContainer");  
-            var yesButton = document.getElementById("yesButton");  
-            var noButton = document.getElementById("noButton");  
+<ul class="download-list">  
+  <li class="download-item">  
+    <a href="https://wwf.lanzouq.com/ikdNr1xp401a" class="download-link" target="_blank">student_scores程序下载</a>  
+  </li>  
+  <!-- 添加更多下载链接... -->  
+</ul>  
   
-            // 清除之前的回应并隐藏  
-            responseElement.textContent = "";  
-            responseElement.classList.remove("visible");  
+<!-- 添加模板示例 -->  
+<h2>通知</h2>  
+<div class="template-notification">  
+  <p>有新版本可用，请尽快更新！</p>  
+</div>  
   
-            // 根据按钮文字给出回应，并显示回应  
-            if (buttonText === 'yes') {    
-                responseElement.textContent = "哈哈，你终于承认了！";
-				// 五秒后关闭浏览器窗口  
-                setTimeout(function() {  
-                    window.close(); // 尝试关闭窗口  
-                }, 5000);  
-            } else {    
-                responseElement.textContent = "居然还不承认！";  
+<h2>更新</h2>  
+<div class="template-user-comments">  
+	<p>更新至v1.5.1</p>  
+  <!-- 假设这是从服务器获取的用户评论，使用textContent设置内容来避免XSS -->  
+  <div class="user-content" id="userComment"></div>  
+  <script>  
+    // 示例：安全地设置用户评论内容  
+    var userCommentElement = document.getElementById('userComment');  
+    var safeComment = '这是一个安全的用户评论示例。'; // 假设这是从服务器安全地获取到的  
+    userCommentElement.textContent = safeComment; // 使用textContent来避免XSS  
+  </script>  
+</div>  
   
-                // 每次点击“不是”时切换按钮位置  
-                if (isSwapped) {  
-                    // 如果已经交换过，则还原到初始位置  
-                    buttonContainer.appendChild(noButton); // 将“不是”按钮移到末尾  
-                } else {  
-                    // 如果尚未交换，则交换按钮位置  
-                    buttonContainer.appendChild(yesButton); // 将“是”按钮移到末尾  
-                    buttonContainer.insertBefore(noButton, yesButton); // 将“不是”按钮移到“是”按钮前面  
-                }  
-                isSwapped = !isSwapped; // 切换isSwapped的值  
-            }  
-  
-            // 显示回应，并立即开始计时隐藏  
-            responseElement.classList.add("visible");  
-  
-            // 使用setTimeout来添加延迟，以便用户可以看到反馈  
-            setTimeout(function() {  
-                responseElement.classList.remove("visible");  
-            }, 1000); // 延迟1秒后隐藏回应  
-        }    
-    </script>    
-</body>    
+</body>  
 </html>
