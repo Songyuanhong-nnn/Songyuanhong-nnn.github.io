@@ -103,12 +103,89 @@
     border-left: 3px solid #007BFF;
     margin-top: 10px;
   }
+  /* 更小的下载模块样式 */
+.download-module.smaller {
+  padding: 15px; /* 减少内边距 */
+  margin-bottom: 15px; /* 减少外边距 */
+}
+
+/* 更小的模块标题样式 */
+.download-module.smaller .module-title {
+  font-size: 1.2em; /* 减少字体大小 */
+  margin-bottom: 5px; /* 减少外边距 */
+}
+
+/* 更小的模块描述样式 */
+.download-module.smaller .module-description {
+  margin-bottom: 10px; /* 减少外边距 */
+}
+
+/* 更小的“了解更多”按钮样式 */
+.download-module.smaller .goto-intro {
+  padding: 8px 15px; /* 减少内边距 */
+  font-size: 0.9em; /* 减少字体大小 */
+}
+  .sidebar {
+    width: 250px;
+    position: fixed;
+    right: -300px; /* 初始时侧边栏完全隐藏在屏幕外 */
+    top: 0;
+    bottom: 0;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease-in-out;
+    overflow-y: auto;
+    z-index: 200;
+  }
+  .sidebar.active {
+    right: 0; /* 当侧边栏激活时，显示它 */
+  }
+
+  /* 更美观的汉堡菜单按钮样式 */
+  .sidebar-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 300;
+    transition: background-color 0.3s ease-in-out;
+  }
+  .sidebar-toggle:focus {
+    background-color: #f4f4f;
+  }
+  .sidebar-toggle .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: #333;
+    transition: all 0.3s ease-in-out;
+  }
+  .sidebar-toggle.active {
+  background-color:  #ADD8E6; 
+  }
+  /* 汉堡菜单的旋转效果 */
+  .sidebar-toggle.active .bar:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  .sidebar-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+  .sidebar-toggle.active .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
 </style>
 </head>
 <body>
 
 <h1>宋沅鸿私人货仓下载库</h1>
-
+<h2>热门模块</h2>
 <!-- 下载模块1 -->
 <div class="download-module">
   <h2 class="module-title"><i class="fas fa-file-download"></i> student_scores程序</h2>
@@ -123,6 +200,12 @@
   <a href="introduction_page2.html" class="goto-intro" target="_blank">敬请期待</a>
 </div>
 
+<!-- 更多选项链接，使用新增的较小样式类 -->
+<div class="download-module smaller">
+  <h2 class="module-title"><i class="fas fa-angle-double-right"></i> 更多选项</h2>
+  <p class="module-description">探索更多实用工具和资源。</p>
+  <a href="more_options_page.html" class="goto-intro">查看更多</a>
+</div>
 
 <!-- 更多下载模块... -->
 
@@ -134,9 +217,41 @@
 
 <h2>更新</h2>
 <div class="template-user-comments">
-  <p>更新至v1.5.1</p>
+  <p>student_scores程序已更新至v1.5.1</p>
   <!-- 假设这是从服务器获取的用户评论，使用textContent设置内容来避免XSS -->
 </div>
 
+<!--侧边栏-->
+
+<!-- 更美观的汉堡菜单按钮 -->
+<button class="sidebar-toggle" onclick="toggleSidebar()">
+  <span class="bar"></span>
+  <span class="bar"></span>
+  <span class="bar"></span>
+</button>
+
+<!-- 侧边栏 -->
+<div class="sidebar">
+  <h3>导航</h3>
+  <ul>
+    <li><a href="#">首页</a></li>
+    <li><a href="#">关于我们</a></li>
+    <li><a href="#">作者介绍</a></li>
+    <li><a href="#">帮助</a></li>
+    <li><a href="#">联系方式</a></li>
+    <!-- 更多侧边栏链接... -->
+  </ul>
+</div>
+
+<script>
+  // 切换侧边栏显示隐藏的函数
+  function toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    const toggleButton = document.querySelector('.sidebar-toggle');
+    sidebar.classList.toggle('active');
+    toggleButton.classList.toggle('active');
+  }
+</script>
+</script>
 </body>
 </html>
