@@ -1,68 +1,142 @@
-<!DOCTYPE html>  
-<html lang="zh-CN">  
-<head>  
-<meta charset="UTF-8">  
-<meta name="viewport" content="width=device-width, initial-scale=1.0">  
-<title>宋大爷加到!通通闪开</title>  
-<style>  
-  /* 简单的样式美化 */  
-  body {  
-    font-family: Arial, sans-serif;  
-    margin: 0;  
-    padding: 20px;  
-  }  
-  h1 {  
-    text-align: center;  
-  }  
-  .download-list {  
-    list-style-type: none;  
-    padding: 0;  
-  }  
-  .download-item {  
-    margin-bottom: 10px;  
-  }  
-  .download-link {  
-    text-decoration: none;  
-    color: #007BFF;  
-    font-weight: bold;  
-  }  
-  /* 防御XSS，这里只是示例，实际上要更加复杂 */  
-  .user-content {  
-    white-space: pre-wrap;  
-    word-wrap: break-word;  
-    /* 使用textContent或innerText来设置内容，避免XSS */  
-  }  
-</style>  
-</head>  
-<body>  
-  
-<h1>宋沅鸿私人货仓下载库</h1>  
-  
-<ul class="download-list">  
-  <li class="download-item">  
-    <a href="https://wwf.lanzouq.com/ikdNr1xp401a" class="download-link" target="_blank">student_scores程序下载</a>  
-  </li>  
-  <!-- 添加更多下载链接... -->  
-</ul>  
-  
-<!-- 添加模板示例 -->  
-<h2>通知</h2>  
-<div class="template-notification">  
-  <p>有新版本可用，请尽快更新！</p>  
-</div>  
-  
-<h2>更新</h2>  
-<div class="template-user-comments">  
-	<p>更新至v1.5.1</p>  
-  <!-- 假设这是从服务器获取的用户评论，使用textContent设置内容来避免XSS -->  
-  <div class="user-content" id="userComment"></div>  
-  <script>  
-    // 示例：安全地设置用户评论内容  
-    var userCommentElement = document.getElementById('userComment');  
-    var safeComment = '这是一个安全的用户评论示例。'; // 假设这是从服务器安全地获取到的  
-    userCommentElement.textContent = safeComment; // 使用textContent来避免XSS  
-  </script>  
-</div>  
-  
-</body>  
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>宋沅鸿私人货仓下载库</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+  }
+  h1 {
+    text-align: center;
+    color: #007BFF;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+  }
+  .download-module {
+    margin-bottom: 20px;
+    padding: 20px;
+    background: linear-gradient(135deg, #6e45e2 0%, #88d3ce 100%);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+  .download-module:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  .module-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #fff;
+  }
+  .module-description {
+    color: #fff;
+    opacity: 0.8;
+    margin-bottom: 15px;
+  }
+  .goto-intro {
+    text-decoration: none;
+    background: #fff;
+    color: #007BFF;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+    display: inline-block;
+  }
+  .goto-intro:hover {
+    background-color: #007BFF;
+    color: #fff;
+  }
+  .download-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 600px;
+  }
+  .download-item {
+    margin: 10px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: calc(50% - 20px);
+    box-sizing: border-box;
+    transition: transform 0.3s ease-in-out;
+  }
+  .download-item:hover {
+    transform: translateY(-5px);
+  }
+  .download-link {
+    text-decoration: none;
+    color: #007BFF;
+    font-weight: bold;
+  }
+  .download-link:hover {
+    text-decoration: underline;
+  }
+  .template-notification, .template-user-comments {
+    margin: 30px 0;
+    padding: 20px;
+    background-color: #e9ecef;
+    border-left: 4px solid #007BFF;
+  }
+  .user-content {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 3px;
+    border-left: 3px solid #007BFF;
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+
+<h1>宋沅鸿私人货仓下载库</h1>
+
+<!-- 下载模块1 -->
+<div class="download-module">
+  <h2 class="module-title"><i class="fas fa-file-download"></i> student_scores程序</h2>
+  <p class="module-description">学生成绩管理系统，用于高效管理学生成绩。</p>
+  <a href="introduction_page1.html" class="goto-intro" target="_blank">详情了解</a>
+</div>
+
+<!-- 下载模块2 -->
+<div class="download-module">
+  <h2 class="module-title"><i class="fas fa-project-diagram"></i> project_managementc程序</h2>
+  <p class="module-description">项目管理工具，帮助团队更有效地协作。</p>
+  <a href="introduction_page2.html" class="goto-intro" target="_blank">敬请期待</a>
+</div>
+
+
+<!-- 更多下载模块... -->
+
+<!-- 添加模板示例 -->
+<h2>通知</h2>
+<div class="template-notification">
+  <p>有新版本可用，请尽快更新！</p>
+</div>
+
+<h2>更新</h2>
+<div class="template-user-comments">
+  <p>更新至v1.5.1</p>
+  <!-- 假设这是从服务器获取的用户评论，使用textContent设置内容来避免XSS -->
+</div>
+
+</body>
 </html>
