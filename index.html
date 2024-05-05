@@ -237,11 +237,17 @@
     <li><a href="#">首页</a></li>
     <li><a href="introduce_myself.html">作者介绍</a></li>
     <li><a href="#">帮助</a></li>
-    <li><a href="#">联系方式</a></li>
+    <li><a href="#" onclick="addQQFriend(); return false;">联系方式</a></li>
     <!-- 更多侧边栏链接... -->
   </ul>
 </div>
 
+<script>
+        function addQQFriend() {
+            alert('我的QQ号码是：3100323439，请复制后在QQ中搜索添加。');
+        }
+</script>
+  
 <script>
   // 切换侧边栏显示隐藏的函数
   function toggleSidebar() {
