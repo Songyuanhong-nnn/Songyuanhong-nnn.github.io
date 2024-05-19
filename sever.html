@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>🌟 创意工坊Minecraft基岩版服务器 🌈</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #9a12b3 0%, #00d2ff 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            color: #333;
+            padding: 20px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            color: #555;
+        }
+        .banner {
+            padding: 40px 0;
+            background: url('minecraft_server_background.jpg') no-repeat center center;
+            background-size: cover;
+            color: #ffffff;
+            text-align: center;
+            position: relative;
+        }
+        .banner h2 {
+            font-size: 2.5em;
+        }
+        .banner p {
+            font-size: 1.2em;
+        }
+        .main-content {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section h2 {
+            color: #9a12b3;
+        }
+        .section p {
+            text-align: justify;
+        }
+        .section img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .qr-code {
+            width: 150px; /* 根据需要调整二维码大小 */
+            margin: 20px auto;
+        }
+        .footer {
+            background: #9a12b3;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 0.9em;
+        }
+		        /* 保留原有的样式定义 */
+        /* 图片查看器样式 */
+        #imageViewer {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            align-items: center;
+            justify-content: center;
+        }
+        #imageViewer img {
+            max-width: 90%;
+            max-height: 80%;
+        }
+        #imageViewer .close {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🎈 创意工坊Minecraft基岩版服务器</h1>
+        </div>
+    </header>
+
+    <section class="banner">
+        <div class="container">
+            <h2>🌈 开启你的创意之旅</h2>
+            <p>在创意工坊，我们相信每个人都有无限的创造力。</p>
+        </div>
+    </section>
+
+    <div class="main-content container">
+        <section id="server-intro" class="section">
+            <h2>🌟 服务器简介</h2>
+            <p>欢迎来到创意工坊，这里是<strong>Minecraft</strong>爱好者的乐园。我们提供一个开放、友好的平台，让玩家可以自由地探索、建造和创造。无论你是资深玩家还是新手，都能在这里找到属于自己的乐趣。服务器基于Minecraft基岩版版本，类型为RPG（角色扮演）服务器，融合了经商、生存和冒险等多种玩法。通过插件和mod的加入，为玩家带来了更加丰富和独特的游戏体验。</p>
+            <img src="QR.jpg" alt="创意工坊服务器展示" class="qr-code">
+        </section>
+
+        <section id="game-modes" class="section">
+            <h2>🎮 服务器特色游戏</h2>
+            <p>创意工坊提供多种游戏模式，包括但不限于：</p>
+            <ul>
+                <li><strong>丰富的副本与活动：</strong>服务器为玩家提供了十一个副本和七个活动，以及两个经验副本。每个节假日都有对应的副本和超强专属装备，让玩家在肝的同时也能收获满满的成就感。</li>
+                <li><strong>庞大的职业体系：</strong>玩家可以选择锻造、圣物、幻兽、勋章、宝石等多种职业，还有副职业供玩家探索。这些职业体系为玩家提供了多样化的游戏选择，使游戏更具深度和策略性。</li>
+                <li><strong>自由交易系统：</strong>服务器支持玩家之间的自由交易，除了某些特定物品外，玩家可以自由买卖游戏内的物品和资源。这为玩家提供了一个庞大的商业帝国，让玩家在游戏中体验到经营和交易的乐趣。</li>
+                <li><strong>超快的更新速度：</strong>服务器保持超快的更新速度，确保游戏的娱乐性和新鲜感。同时，服务器不会随意调整副本难度，让玩家可以放心体验游戏。</li>
+            </ul>
+        </section>
+
+        <section id="special-events" class="section">
+            <h2>🎉 特色活动</h2>
+            <p>我们定期举办各种<strong>特色活动</strong>，包括建筑比赛、寻宝活动和节日庆典等。</p>
+        </section>
+
+        <section id="player-stories" class="section">
+            <h2>📚 玩家故事</h2>
+            <p>每个玩家在创意工坊都有自己的故事。我们鼓励玩家分享自己的冒险经历和创造过程。</p>
+        </section>
+
+        <section id="faq" class="section">
+            <h2>❓ 常见问题解答</h2>
+            <p>这里有一些新玩家常见的问题及解答。</p>
+            <!-- FAQ内容可以在这里添加 -->
+        </section>
+
+        <section id="
