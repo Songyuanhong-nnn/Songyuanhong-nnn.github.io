@@ -15,75 +15,57 @@
         * { -webkit-backface-visibility: hidden; backface-visibility: hidden; -webkit-tap-highlight-color: transparent; }
         body { background: #000; color: #fff; font-family: 'PingFang SC', sans-serif; overflow-x: hidden; }
 
-        /* 导航栏适配：确保不换行 */
+        .text-accent { color: var(--accent); text-shadow: 0 0 15px rgba(0, 255, 157, 0.4); }
+
+        /* 导航栏适配：防止名字错行 */
         nav { background: rgba(0,0,0,0.95); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        
+        /* 关键修复：公司名字在手机上自动缩放，不换行 */
         .company-name { 
-            font-size: clamp(12px, 3.8vw, 20px); 
+            font-size: clamp(14px, 4vw, 20px); 
             white-space: nowrap; 
-            letter-spacing: -0.02em;
         }
 
-        /* 视频容器适配：解决视频过大显示不全的问题 */
-        .hero-section {
-            position: relative;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        .video-container {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
+        /* 视频层：确保全屏且不被手机浏览器劫持 */
         .hero-video { 
-            width: 100%;
-            height: 100%;
-            /* 在电脑端覆盖，在手机端通过媒体查询调整 */
-            object-fit: cover; 
-            opacity: 0.7;
+            position: absolute; inset: 0; width: 100%; height: 100%; 
+            object-fit: cover; opacity: 0.65; z-index: -1; 
         }
-
-        /* 手机端专项：确保视频比例完全呈现 */
-        @media (max-width: 768px) {
-            .hero-video {
-                object-fit: contain; /* 保证视频不被裁切 */
-                width: 100vw;
-                height: auto;
-                max-height: 70vh; /* 限制高度，防止遮挡文字 */
-            }
-        }
-
         .hero-gradient { 
-            position: absolute; 
-            inset: 0; 
-            z-index: 2;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, #000 90%); 
+            position: absolute; inset: 0; 
+            background: linear-gradient(to bottom, transparent 60%, #000 100%); 
         }
 
-        /* 其他板块优化 */
-        .responsive-py { padding-top: 4rem; padding-bottom: 4rem; }
+        /* 板块间距：手机端调小，电脑端保持 */
+        .responsive-py { padding-top: 5rem; padding-bottom: 5rem; }
         @media (min-width: 768px) { .responsive-py { padding-top: 8rem; padding-bottom: 8rem; } }
 
-        .section-reveal { opacity: 0; transform: translateY(30px); }
+        .section-reveal { opacity: 0; transform: translateY(30px); will-change: transform, opacity; }
+
+        /* 图片发光适配 */
+        .prod-img-box {
+            width: 100%; max-width: 480px;
+            filter: drop-shadow(0 0 30px rgba(0, 255, 157, 0.25));
+        }
+        .ai-mockup {
+            max-width: 260px; height: auto; margin: 0 auto;
+            filter: drop-shadow(0 0 20px rgba(0, 255, 157, 0.3));
+        }
 
         .feature-box {
             background: rgba(255,255,255,0.03);
             border-left: 3px solid var(--accent);
             padding: 1.25rem;
+            transition: 0.4s;
         }
+
+        .timeline-item { border-left: 1px solid rgba(255,255,255,0.1); padding-left: 1.2rem; position: relative; margin-bottom: 1.5rem; }
+        .timeline-item::before { content: ''; position: absolute; left: -5px; top: 0; width: 9px; height: 9px; background: var(--accent); border-radius: 50%; }
 
         .btn-douyin {
             background: var(--accent); color: #000; font-weight: 900;
-            padding: 0.8rem 2.5rem; text-transform: uppercase;
-            box-shadow: 0 0 20px rgba(0, 255, 157, 0.3);
+            padding: 0.8rem 2rem; text-transform: uppercase; letter-spacing: 1px;
+            transition: 0.3s; box-shadow: 0 0 20px rgba(0, 255, 157, 0.3);
         }
     </style>
 </head>
@@ -91,129 +73,129 @@
 
     <nav class="fixed w-full z-50 px-4 md:px-8 py-3 md:py-4 flex justify-between items-center">
         <div class="flex items-center gap-2 md:gap-4">
-            <img src="logo.png" alt="Logo" class="h-7 md:h-9 w-auto">
+            <img src="logo.png" alt="Logo" class="h-8 md:h-9 w-auto">
             <div class="flex flex-col border-l border-zinc-700 pl-2 md:pl-3">
-                <span class="company-name font-black text-white">HUIYE BIOTECH</span>
+                <span class="company-name font-black tracking-tighter text-white">HUIYE BIOTECH</span>
                 <span class="text-[7px] md:text-[8px] tracking-[0.2em] text-zinc-500 uppercase">辉晔生物科技</span>
             </div>
         </div>
-        <div class="flex gap-4 text-[10px] font-bold text-zinc-400">
-            <a href="#tech">技术</a>
-            <a href="#honor">荣誉</a>
+        <div class="flex gap-4 md:gap-8 text-[10px] font-bold uppercase text-zinc-400">
+            <a href="#tech" class="hover:text-accent transition">技术</a>
+            <a href="#honor" class="hover:text-accent transition">荣誉</a>
         </div>
     </nav>
 
-    <section class="hero-section">
-        <div class="video-container">
-            <video 
-                id="bgVideo"
-                autoplay muted loop playsinline 
-                webkit-playsinline="true" 
-                x5-video-player-type="h5-page"
-                poster="p_exterior.webp" 
-                class="hero-video">
-                <source src="hero_video.mp4" type="video/mp4">
-            </video>
-            <div class="hero-gradient"></div>
-        </div>
-        
-        <div class="relative z-10 text-center px-6 mt-20 md:mt-0">
-            <h1 class="text-4xl md:text-8xl font-black tracking-tighter mb-4 italic italic" id="h-title" style="opacity:0">HUIYE BIOTECH</h1>
-            <p class="text-sm md:text-xl tracking-[0.5em] text-[#00FF9D] opacity-0" id="h-sub">芯呼智诊 · 掌上云联</p>
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <video 
+            id="bgVideo"
+            autoplay muted loop playsinline 
+            webkit-playsinline="true" 
+            x5-video-player-type="h5-page"
+            poster="p_exterior.webp" 
+            class="hero-video">
+            <source src="hero_video.mp4" type="video/mp4">
+        </video>
+        <div class="hero-gradient"></div>
+        <div class="relative z-10 text-center px-4">
+            <h1 class="text-4xl md:text-8xl font-black tracking-tighter mb-4 italic" id="h-title">HUIYE BIOTECH</h1>
+            <p class="text-base md:text-xl tracking-[0.5em] md:tracking-[1em] text-accent opacity-0" id="h-sub">芯呼智诊 · 掌上云联</p>
         </div>
     </section>
 
-    <section id="tech" class="responsive-py px-6 md:px-10 max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center section-reveal">
-        <div class="space-y-6">
-            <h2 class="text-3xl md:text-5xl font-bold italic uppercase text-white">单步集成 <br><span class="text-[#00FF9D]">RPA-CRISPR</span></h2>
+    <section id="tech" class="responsive-py px-6 md:px-10 max-w-7xl mx-auto grid md:grid-cols-2 gap-10 md:gap-16 items-center section-reveal">
+        <div class="space-y-6 md:space-y-8">
+            <h2 class="text-3xl md:text-5xl font-bold italic uppercase leading-tight text-white">单步集成 <br><span class="text-accent">RPA-CRISPR</span></h2>
             <div class="space-y-4">
                 <div class="feature-box">
-                    <h4 class="font-bold text-white text-sm">闭管反应系统</h4>
+                    <h4 class="font-bold text-white text-sm md:text-base">闭管反应系统</h4>
                     <p class="text-xs text-zinc-500 mt-1">杜绝气溶胶污染，让核酸检测在普通环境下安全运行。</p>
                 </div>
                 <div class="feature-box">
-                    <h4 class="font-bold text-white text-sm">37°C 恒温扩增</h4>
+                    <h4 class="font-bold text-white text-sm md:text-base">37°C 恒温扩增</h4>
                     <p class="text-xs text-zinc-500 mt-1">无需热循环仪，随手开启高效检测体验。</p>
                 </div>
             </div>
         </div>
         <div class="flex justify-center">
-            <img src="p_exterior.webp" class="w-full max-w-[400px]" style="filter: drop-shadow(0 0 30px rgba(0,255,157,0.2))" id="p-img">
+            <img src="p_exterior.webp" class="prod-img-box" id="p-img">
         </div>
     </section>
 
     <section id="ai" class="responsive-py bg-zinc-950 px-6 md:px-10 section-reveal">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center gap-10">
-            <div class="flex-1 space-y-6">
-                <h2 class="text-3xl md:text-5xl font-bold italic text-white">AI <span class="text-[#00FF9D]">云联判读</span></h2>
-                <p class="text-zinc-500 text-sm md:text-lg">
-                    手机拍照即可判读，100% 识别准确率。即时对接云端大数据，提供智慧医疗用药建议。
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center gap-10 md:gap-20">
+            <div class="flex-1 space-y-6 md:space-y-8">
+                <h2 class="text-3xl md:text-5xl font-bold italic text-white">AI <span class="text-accent">云联判读</span></h2>
+                <p class="text-zinc-500 text-sm md:text-lg leading-relaxed">
+                    通过迁移学习模型，实现 100% 识别准确率。手机拍照即可判读，即时对接云端大数据。
                 </p>
-                <div class="flex gap-8 py-4 border-y border-zinc-900 text-center">
+                <div class="flex gap-8 py-6 border-y border-zinc-900">
                     <div>
-                        <div class="text-2xl font-black italic text-[#00FF9D]">15 MIN</div>
-                        <div class="text-[9px] text-zinc-600 uppercase">检测效率</div>
+                        <div class="text-2xl md:text-3xl font-black italic text-accent">15 MIN</div>
+                        <div class="text-[9px] md:text-[10px] text-zinc-600 uppercase">检测效率</div>
                     </div>
                     <div>
-                        <div class="text-2xl font-black italic text-white">fM 级</div>
-                        <div class="text-[9px] text-zinc-600 uppercase">灵敏度</div>
+                        <div class="text-2xl md:text-3xl font-black italic text-white">fM 级</div>
+                        <div class="text-[9px] md:text-[10px] text-zinc-600 uppercase">灵敏度</div>
                     </div>
                 </div>
             </div>
             <div class="flex-1">
-                <img src="p_ai_app.webp" class="max-w-[220px] mx-auto" style="filter: drop-shadow(0 0 20px rgba(0,255,157,0.3))">
+                <img src="p_ai_app.webp" class="ai-mockup" alt="AI Interface">
             </div>
         </div>
     </section>
 
-    <section id="honor" class="responsive-py px-6 md:px-10 max-w-4xl mx-auto section-reveal text-center md:text-left">
-        <h3 class="text-zinc-700 font-bold tracking-[0.4em] mb-12 uppercase text-xs italic">// Milestone & Honors</h3>
-        <div class="space-y-6 inline-block text-left">
-            <div class="border-l-2 border-[#00FF9D] pl-4">
-                <h4 class="font-bold text-white text-sm">2024 - 国家级荣誉</h4>
-                <p class="text-[11px] text-zinc-500">荣获三项国家级大学生创新创业训练计划项目立项。</p>
+    <section id="honor" class="responsive-py px-6 md:px-10 max-w-4xl mx-auto section-reveal">
+        <h3 class="text-center text-zinc-700 font-bold tracking-[0.4em] mb-12 uppercase text-xs italic">// Milestone & Honors</h3>
+        <div class="space-y-4">
+            <div class="timeline-item">
+                <h4 class="font-bold text-white text-xs md:text-sm">2024 - 国家级荣誉</h4>
+                <p class="text-[11px] md:text-xs text-zinc-500">荣获三项国家级大学生创新创业训练计划项目立项。</p>
             </div>
-            <div class="border-l-2 border-zinc-800 pl-4">
-                <h4 class="font-bold text-white text-sm">2023 - 核心研发启动</h4>
-                <p class="text-[11px] text-zinc-500">正式开始 RPA-CRISPR 单步集成体系的实验论证。</p>
+            <div class="timeline-item">
+                <h4 class="font-bold text-white text-xs md:text-sm">2023 - 核心研发启动</h4>
+                <p class="text-[11px] md:text-xs text-zinc-500">正式开始 RPA-CRISPR 单步集成体系的实验论证。</p>
             </div>
         </div>
 
-        <div class="mt-16">
-            <a href="https://v.douyin.com/SZRoF7LQbTo/" target="_blank" class="btn-douyin inline-block text-xs">
+        <div class="mt-20 text-center">
+            <a href="https://v.douyin.com/SZRoF7LQbTo/" target="_blank" class="btn-douyin inline-block text-xs md:text-sm">
                 关注辉晔生物官方抖音
             </a>
         </div>
     </section>
 
-    <footer class="py-10 text-center border-t border-zinc-900">
-        <p class="text-zinc-800 text-[8px] tracking-[0.3em] uppercase font-black">HUIYE BIOTECH | 辉晔生物 - 智领健康</p>
+    <footer class="py-12 text-center border-t border-zinc-900">
+        <p class="text-zinc-800 text-[8px] md:text-[9px] tracking-[0.3em] uppercase font-black">HUIYE BIOTECH | 辉晔生物 - 智领健康</p>
     </footer>
 
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        // 视频补齐
+        // 视频补齐脚本：手机浏览器有时需要手动触发
         document.addEventListener('touchstart', function() {
             const video = document.getElementById('bgVideo');
             if (video) { video.play(); }
         }, { once: true });
 
-        // 入场动画
-        gsap.to("#h-title", { opacity: 1, y: 0, duration: 1 });
-        gsap.to("#h-sub", { opacity: 1, y: -10, delay: 0.3, duration: 0.8 });
+        // 首屏入场
+        gsap.to("#h-title", { opacity: 1, y: 0, duration: 1.2 });
+        gsap.to("#h-sub", { opacity: 1, y: -10, delay: 0.4, duration: 0.8 });
 
+        // 板块平滑滑入
         gsap.utils.toArray(".section-reveal").forEach(el => {
             gsap.to(el, {
                 scrollTrigger: {
                     trigger: el,
                     start: "top 90%",
-                    toggleActions: "play none none reverse"
+                    toggleActions: "play none none reverse",
+                    fastScrollEnd: true
                 },
                 opacity: 1, y: 0, duration: 0.8
             });
         });
 
+        // 浮动特效
         gsap.to("#p-img", { y: -10, duration: 2, repeat: -1, yoyo: true, ease: "sine.inOut" });
     </script>
 </body>
