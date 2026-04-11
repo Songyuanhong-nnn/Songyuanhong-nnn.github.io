@@ -15,50 +15,34 @@
         * { -webkit-backface-visibility: hidden; backface-visibility: hidden; -webkit-tap-highlight-color: transparent; }
         body { background: #000; color: #fff; font-family: 'PingFang SC', sans-serif; overflow-x: hidden; }
 
-        .text-accent { color: var(--accent); text-shadow: 0 0 15px rgba(0, 255, 157, 0.4); }
-
-        /* 导航栏适配：防止名字错行 */
+        /* 导航栏适配 */
         nav { background: rgba(0,0,0,0.95); border-bottom: 1px solid rgba(255,255,255,0.05); }
-        
-        /* 关键修复：公司名字在手机上自动缩放，不换行 */
-        .company-name { 
-            font-size: clamp(14px, 4vw, 20px); 
-            white-space: nowrap; 
-        }
+        .company-name { font-size: clamp(14px, 4vw, 20px); white-space: nowrap; }
 
-        /* 视频层：确保全屏且不被手机浏览器劫持 */
+        /* 视频层优化 */
         .hero-video { 
             position: absolute; inset: 0; width: 100%; height: 100%; 
-            object-fit: cover; opacity: 0.65; z-index: -1; 
+            object-fit: cover; opacity: 0; /* 初始透明，等待加载后淡入 */
+            z-index: -1; 
+            transition: opacity 1s ease-in-out;
         }
+        /* 视频加载后的显示类 */
+        .video-loaded { opacity: 0.65; }
+
         .hero-gradient { 
             position: absolute; inset: 0; 
             background: linear-gradient(to bottom, transparent 60%, #000 100%); 
         }
 
-        /* 板块间距：手机端调小，电脑端保持 */
         .responsive-py { padding-top: 5rem; padding-bottom: 5rem; }
         @media (min-width: 768px) { .responsive-py { padding-top: 8rem; padding-bottom: 8rem; } }
 
         .section-reveal { opacity: 0; transform: translateY(30px); will-change: transform, opacity; }
 
-        /* 图片发光适配 */
-        .prod-img-box {
-            width: 100%; max-width: 480px;
-            filter: drop-shadow(0 0 30px rgba(0, 255, 157, 0.25));
-        }
-        .ai-mockup {
-            max-width: 260px; height: auto; margin: 0 auto;
-            filter: drop-shadow(0 0 20px rgba(0, 255, 157, 0.3));
-        }
+        .prod-img-box { width: 100%; max-width: 480px; filter: drop-shadow(0 0 30px rgba(0, 255, 157, 0.25)); }
+        .ai-mockup { max-width: 260px; height: auto; margin: 0 auto; filter: drop-shadow(0 0 20px rgba(0, 255, 157, 0.3)); }
 
-        .feature-box {
-            background: rgba(255,255,255,0.03);
-            border-left: 3px solid var(--accent);
-            padding: 1.25rem;
-            transition: 0.4s;
-        }
-
+        .feature-box { background: rgba(255,255,255,0.03); border-left: 3px solid var(--accent); padding: 1.25rem; transition: 0.4s; }
         .timeline-item { border-left: 1px solid rgba(255,255,255,0.1); padding-left: 1.2rem; position: relative; margin-bottom: 1.5rem; }
         .timeline-item::before { content: ''; position: absolute; left: -5px; top: 0; width: 9px; height: 9px; background: var(--accent); border-radius: 50%; }
 
@@ -89,9 +73,9 @@
         <video 
             id="bgVideo"
             autoplay muted loop playsinline 
+            preload="auto"
             webkit-playsinline="true" 
             x5-video-player-type="h5-page"
-            poster="p_exterior.webp" 
             class="hero-video">
             <source src="hero_video.mp4" type="video/mp4">
         </video>
@@ -157,7 +141,6 @@
                 <p class="text-[11px] md:text-xs text-zinc-500">正式开始 RPA-CRISPR 单步集成体系的实验论证。</p>
             </div>
         </div>
-
         <div class="mt-20 text-center">
             <a href="https://v.douyin.com/SZRoF7LQbTo/" target="_blank" class="btn-douyin inline-block text-xs md:text-sm">
                 关注辉晔生物官方抖音
@@ -172,17 +155,25 @@
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        // 视频补齐脚本：手机浏览器有时需要手动触发
+        const video = document.getElementById('bgVideo');
+
+        // 【核心脚本】：当视频准备好播放时，再添加显示类，实现淡入
+        video.oncanplaythrough = function() {
+            video.classList.add('video-loaded');
+        };
+
+        // 兼容某些浏览器不触发 canplaythrough 的情况
+        setTimeout(() => {
+            video.classList.add('video-loaded');
+        }, 2000);
+
         document.addEventListener('touchstart', function() {
-            const video = document.getElementById('bgVideo');
             if (video) { video.play(); }
         }, { once: true });
 
-        // 首屏入场
         gsap.to("#h-title", { opacity: 1, y: 0, duration: 1.2 });
         gsap.to("#h-sub", { opacity: 1, y: -10, delay: 0.4, duration: 0.8 });
 
-        // 板块平滑滑入
         gsap.utils.toArray(".section-reveal").forEach(el => {
             gsap.to(el, {
                 scrollTrigger: {
@@ -195,7 +186,6 @@
             });
         });
 
-        // 浮动特效
         gsap.to("#p-img", { y: -10, duration: 2, repeat: -1, yoyo: true, ease: "sine.inOut" });
     </script>
 </body>
