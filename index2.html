@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Banana - Professional Minecraft Independent Developer Portfolio">
+    <meta name="author" content="Banana">
+    <title>Banana | Minecraft Developer Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+        }
+
+        :root {
+            --mc-green: #5BA66E;
+            --mc-dark: #1f1f1f;
+            --mc-card: #2a2a2a;
+            --mc-stone: #757575;
+            --mc-gold: #ffd369;
+            --mc-text: #f0f0f0;
+            --mc-border: #444;
+        }
+
+        body {
+            background-color: var(--mc-dark);
+            color: var(--mc-text);
+            line-height: 1.7;
+            background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('background1.png');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #181818;
+            border-bottom: 2px solid var(--mc-green);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.4);
+        }
+
+        .nav-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--mc-gold);
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--mc-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--mc-green);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: var(--mc-green);
+            transition: 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            color: #fff;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+
+        .hero h1 span {
+            color: var(--mc-gold);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #ccc;
+            max-width: 700px;
+            margin-bottom: 2.5rem;
+        }
+
+        .btn {
+            padding: 12px 32px;
+            background: var(--mc-green);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 4px;
+            transition: 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #4a8f5c;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(91, 166, 110, 0.3);
+        }
+
+        /* Section Common */
+        .section {
+            padding: 6rem 0;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--mc-green);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--mc-gold);
+            margin: 12px auto 0;
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-card {
+            background: var(--mc-card);
+            border: 1px solid var(--mc-border);
+            border-radius: 12px;
+            padding: 2.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            transition: 0.3s ease;
+        }
+
+        .about-card:hover {
+            border-color: var(--mc-green);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .about-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--mc-gold);
+        }
+
+        .about-card p {
+            color: #ddd;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .skill-tag {
+            background: #333;
+            border: 1px solid var(--mc-green);
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            transition: 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: var(--mc-green);
+            color: #fff;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--mc-card);
+            border: 1px solid var(--mc-border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--mc-gold);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.4);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .project-body {
+            padding: 1.5rem;
+        }
+
+        .project-body h3 {
+            color: var(--mc-gold);
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+        }
+
+        .project-body p {
+            color: #bbb;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .project-tag {
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            background: #3a3a3a;
+            color: var(--mc-green);
+            border-radius: 4px;
+        }
+
+        /* Contact Section */
+        .contact-box {
+            text-align: center;
+            background: var(--mc-card);
+            border: 1px solid var(--mc-green);
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-box p {
+            color: #ddd;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #888;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--mc-border);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+            .nav-links {
+                gap: 1rem;
+            }
+            .nav-wrap {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <div class="nav-wrap">
+            <div class="logo">BANANA DEV</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="home" class="hero container">
+        <h1>Hi, I'm <span>Banana</span></h1>
+        <p>Independent Minecraft Developer | Specialized in Server Development, Custom Plugins, Map Building &amp; Resource Pack Design</p>
+        <a href="#projects" class="btn">View My Works</a>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section container">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-card">
+            <h3>Independent Minecraft Developer</h3>
+            <p>I am Banana, a professional independent Minecraft developer with years of experience in Minecraft ecosystem creation and development. I focus on creating high-quality, stable, and creative Minecraft content including custom servers, original adventure maps, functional plugins, and optimized resource packs.</p>
+            <br/>
+            <p>I am proficient in Minecraft server operation, plugin coding, command block logic, terrain architecture, and visual resource design. I am committed to turning every creative idea into playable, polished Minecraft works.</p>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="section container">
+        <h2 class="section-title">My Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-tag">Server Deployment</div>
+            <div class="skill-tag">Custom Plugin Development</div>
+            <div class="skill-tag">RPG Map Design</div>
+            <div class="skill-tag">Command Block System</div>
+            <div class="skill-tag">Resource Pack Making</div>
+            <div class="skill-tag">MC Architecture</div>
+            <div class="skill-tag">Server Maintenance</div>
+            <div class="skill-tag">Java Development</div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="section container">
+        <h2 class="section-title">My Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <img class="project-img" src="1.png" alt="Survival Server">
+                <div class="project-body">
+                    <h3>Original Survival Server</h3>
+                    <p>Stable long-term running Minecraft survival server with complete economy, territory, quest and player ranking systems.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Server</span>
+                        <span class="project-tag">Survival</span>
+                        <span class="project-tag">Custom System</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img class="project-img" src="2.png" alt="RPG Adventure Map">
+                <div class="project-body">
+                    <h3>Custom RPG Adventure Map</h3>
+                    <p>Original storyline multiplayer RPG map with unique classes, dungeon levels, boss battles and complete task logic.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Map Build</span>
+                        <span class="project-tag">RPG</span>
+                        <span class="project-tag">Command Logic</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img class="project-img" src="3.png" alt="Plugin Development">
+                <div class="project-body">
+                    <h3>Custom Functional Plugins</h3>
+                    <p>Self-developed Minecraft plugins for personalized server functions, including ranking, teleportation, daily rewards and custom game mechanics.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Java</span>
+                        <span class="project-tag">Plugin Dev</span>
+                        <span class="project-tag">Custom Function</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img class="project-img" src="4.png" alt="Resource Pack">
+                <div class="project-body">
+                    <h3>Custom Resource Pack</h3>
+                    <p>High-resolution texture resource packs with custom UI, item textures and visual optimization for shader compatibility.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Texture Design</span>
+                        <span class="project-tag">Resource Pack</span>
+                        <span class="project-tag">Visual Optimize</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section container">
+        <h2 class="section-title">Contact Me</h2>
+        <div class="contact-box">
+            <p>Open for Minecraft custom development commissions, server building, map production and plugin customization.</p>
+            <a href="banana_nnn@163.com" class="btn">Get In Touch</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Banana | Independent Minecraft Developer. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Smooth Scroll JS -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
